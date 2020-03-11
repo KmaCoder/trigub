@@ -43,15 +43,21 @@ if __name__ == '__main__':
         y = utils.tdma(a, b, c, f, n)
     f[n - 1] = 0  # utils.damb0(t1)
 
-    x = [x / 10.0 for x in range(len(y))]
+    x = [x / 10.0 for x in range(101)]
+
+    new_x = []
+    for i in range(len(y)):
+        x_i = max(0, min(len(x) - 1, int(i * len(x) / len(y))))
+        new_x.append(x[x_i])
+
     x_t = [x / 10.0 for x in range(100)]
     y_t = [utils.precise_solution(x / 10.0, T, V, D) for x in range(100)]
-    print(f"x len: {len(x)}")
+    print(f"x len: {len(new_x)}")
     print(f"y len: {len(y)}")
     plt.xlabel('$x$')
     plt.ylabel('$t$')
     plt.plot(x_t, y_t)
-    plt.plot(x, y, "r+")
+    plt.plot(new_x, y, "r+")
     plt.show()
 
     # Чисельний розв'язок
